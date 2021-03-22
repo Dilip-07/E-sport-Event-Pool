@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "977718029416",
+    "project_id": "esporteventpool",
+    "storage_bucket": "esporteventpool.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977718029416:android:69e2b2d85fe49655f2dfdd",
+        "android_client_info": {
+          "package_name": "com.example.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977718029416-pvpcuadk3h4uulgfniupfjmv8ua0cfv0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkgy56Rsi_yEwcg365TP07XpAojS7y2s4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977718029416-pvpcuadk3h4uulgfniupfjmv8ua0cfv0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
