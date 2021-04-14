@@ -11,6 +11,15 @@ class LogInPage extends StatefulWidget {
 class _LogInPageState extends State<LogInPage> {
   final _formKey = GlobalKey<FormState>();
 
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -53,6 +62,7 @@ class _LogInPageState extends State<LogInPage> {
                           ),
                         ),
                         TextFormField(
+                          controller: email,
                           decoration: InputDecoration(
                             hintText: 'Email',
                             labelText: 'Email',
@@ -71,6 +81,7 @@ class _LogInPageState extends State<LogInPage> {
                           height: 20,
                         ),
                         TextFormField(
+                          controller: password,
                           decoration: InputDecoration(
                             hintText: 'Password',
                             labelText: 'Password',

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:user/Screens/Home/home_screen.dart';
+import 'package:user/Screens/Welcomepage/welcomepage.dart';
+import 'package:user/init.dart';
 
-void main() {
+void main() async {
+  await AppInit.initialize();
   runApp(MyApp());
 }
 
@@ -15,6 +17,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         debugShowCheckedModeBanner: false,
-        home: HomeScreen());
+        home: WelcomePage());
   }
 }
