@@ -12,7 +12,10 @@ class UserRepository {
           .user;
 
       if (response.uid != null) {
-        FirebaseFirestore.instance.collection("users").doc(response.uid).set({
+        await FirebaseFirestore.instance
+            .collection("users")
+            .doc(response.uid)
+            .set({
           'nickName': userModel.nickName,
           'dob': userModel.dob,
           'phoneNumber': userModel.phoneNumber,
@@ -28,6 +31,24 @@ class UserRepository {
           isSuccess: false,
           message: "Register Failed",
         );
+      }
+    } catch (e) {
+      return Status(data: null, isSuccess: false, message: e.message);
+    }
+  }
+
+  Future<Status> loginUser({UserModel userModel}) async {
+    try {
+      User user = (await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: userModel.email,
+        password: userModel.password,
+      ))
+          .user;
+
+      if (user.uid != null) {
+        return Status(message: "Success", data: user, isSuccess: true);
+      } else {
+        return Status(data: null, isSuccess: true, message: "Could not Login");
       }
     } catch (e) {
       return Status(data: null, isSuccess: false, message: e.message);
