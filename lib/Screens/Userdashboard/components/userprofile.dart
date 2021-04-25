@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:user/Screens/Loginpage/Login_page.dart';
 
 class Userprofile extends StatefulWidget {
   @override
@@ -12,7 +14,10 @@ class _UserprofileState extends State<Userprofile> {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               }),
@@ -76,6 +81,15 @@ class _UserprofileState extends State<Userprofile> {
             Divider(
               height: 5,
             ),
+            ListTile(
+                title: Text("Log Out"),
+                leading: Icon(Icons.logout),
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut().then((value) {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => LogInPage()));
+                  });
+                })
           ],
         ));
   }
