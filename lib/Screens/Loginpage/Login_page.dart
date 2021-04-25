@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:user/Screens/Registerpage/register_page.dart';
 import 'package:user/Screens/Userdashboard/userdashboard.dart';
 import 'package:user/blocs/auth_bloc/auth_bloc.dart';
+import 'package:user/model/usermodel.dart';
 
 import '../../di.dart';
 
@@ -32,6 +33,13 @@ class _LogInPageState extends State<LogInPage> {
     return BlocConsumer<AuthBloc, AuthState>(
       bloc: inject<AuthBloc>(),
       listener: (context, state) {
+        if (state is AuthLoadingState) {
+          Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.blue,
+            ),
+          );
+        }
         if (state is AuthenticatedState) {
           Fluttertoast.showToast(
             msg: state.status.message,
@@ -43,104 +51,116 @@ class _LogInPageState extends State<LogInPage> {
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => Userdashboard()));
         }
+        if (state is AuthErrorState) {
+          Fluttertoast.showToast(
+            msg: state.errorMessage,
+            backgroundColor: Colors.white,
+            textColor: Colors.red,
+          );
+        }
       },
       builder: (context, state) {
         return Scaffold(
           backgroundColor: Colors.white,
-          body: Container(
-            height: height,
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          SizedBox(height: height * .2),
-                          _title(),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Text(
-                            "SIGN IN",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Color(0xff333951),
-                              fontWeight: FontWeight.bold,
+          body: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            child: Container(
+              height: height,
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(height: height * .2),
+                            _title(),
+                            SizedBox(
+                              height: 50,
                             ),
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Container(
-                            width: 30,
-                            child: Divider(
-                              color: Color(0xfff79c4f),
-                              thickness: 2,
-                            ),
-                          ),
-                          TextFormField(
-                            controller: email,
-                            decoration: InputDecoration(
-                              hintText: 'Email',
-                              labelText: 'Email',
-                              suffixIcon: Icon(
-                                Icons.mail_outline,
+                            Text(
+                              "SIGN IN",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Color(0xff333951),
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return 'please enter your email';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          TextFormField(
-                            controller: password,
-                            decoration: InputDecoration(
-                              hintText: 'Password',
-                              labelText: 'Password',
-                              suffixIcon: Icon(
-                                Icons.lock_outline,
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Container(
+                              width: 30,
+                              child: Divider(
+                                color: Color(0xfff79c4f),
+                                thickness: 2,
                               ),
                             ),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return ' Please Enter your password';
-                              }
-                              return null;
-                            },
-                            obscureText: true,
-                          ),
-                          SizedBox(height: 30),
-                          _submitButton(),
-                          SizedBox(height: 30),
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            alignment: Alignment.center,
-                            child: Text('Forgot Password ?',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xfff79c4f))),
-                          ),
-                          _divider(),
-                          SizedBox(height: height * .050),
-                          _createAccountLabel(),
-                        ],
+                            TextFormField(
+                              controller: email,
+                              decoration: InputDecoration(
+                                hintText: 'Email',
+                                labelText: 'Email',
+                                suffixIcon: Icon(
+                                  Icons.mail_outline,
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'please enter your email';
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            TextFormField(
+                              controller: password,
+                              decoration: InputDecoration(
+                                hintText: 'Password',
+                                labelText: 'Password',
+                                suffixIcon: Icon(
+                                  Icons.lock_outline,
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return ' Please Enter your password';
+                                }
+                                return null;
+                              },
+                              obscureText: true,
+                            ),
+                            SizedBox(height: 30),
+                            _submitButton(),
+                            SizedBox(height: 30),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              alignment: Alignment.center,
+                              child: Text('Forgot Password ?',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xfff79c4f))),
+                            ),
+                            _divider(),
+                            SizedBox(height: height * .050),
+                            _createAccountLabel(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Positioned(top: 40, left: 0, child: _backButton()),
-              ],
+                  Positioned(top: 40, left: 0, child: _backButton()),
+                ],
+              ),
             ),
           ),
         );
@@ -205,7 +225,24 @@ class _LogInPageState extends State<LogInPage> {
       padding: EdgeInsets.symmetric(vertical: 15),
       alignment: Alignment.center,
       child: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            if (!_formKey.currentState.validate()) {
+              Fluttertoast.showToast(
+                msg: "Invalid details",
+                backgroundColor: Colors.white,
+                textColor: Colors.red,
+              );
+            } else {
+              inject<AuthBloc>().add(
+                LoginEvent(
+                  userModel: UserModel(
+                    email: email.text.trim(),
+                    password: password.text.trim(),
+                  ),
+                ),
+              );
+            }
+          },
           child: Container(
             height: 50,
             width: double.infinity,
