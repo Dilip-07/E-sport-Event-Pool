@@ -11,13 +11,18 @@ class _UserprofileState extends State<Userprofile> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.of(context).pop();
+              }),
           backgroundColor: Colors.white,
           title: Text(
             'profile'.toUpperCase(),
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: Color(0xff333951)),
           ),
-          centerTitle: false,
+          centerTitle: true,
         ),
         body: ListView(
           padding: EdgeInsets.fromLTRB(20, 20, 20, 50),
