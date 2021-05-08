@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:user/Screens/Userdashboard/components/bookmark.dart';
-import 'package:user/Screens/Userdashboard/components/events.dart';
 import 'package:user/Screens/Userdashboard/components/games.dart';
-import 'package:user/Screens/Userdashboard/components/home.dart';
+import 'package:user/Screens/Userdashboard/components/tournament.dart';
 import 'package:user/Screens/Userdashboard/components/userprofile.dart';
 
 class Userdashboard extends StatefulWidget {
@@ -20,7 +19,6 @@ class _UserdashboardState extends State<Userdashboard> {
   List<IconData> iconList = [
     Feather.home,
     Feather.grid,
-    Feather.list,
     Feather.bookmark,
     Feather.user
   ];
@@ -59,9 +57,8 @@ class _UserdashboardState extends State<Userdashboard> {
         controller: _pageController,
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
-          Home(),
           Games(),
-          Events(),
+          Tournament(),
           Bookmark(),
           Userprofile(),
         ],
