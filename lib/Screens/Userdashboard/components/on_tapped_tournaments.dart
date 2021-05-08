@@ -11,26 +11,43 @@ class OnTappedTournaments extends StatefulWidget {
 }
 
 class _OnTappedTournamentsState extends State<OnTappedTournaments> {
+  Color kPrimaryColor = Color(0xFF0C9869);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
               color: Colors.black,
             ),
-            onPressed: () {}),
-        title: Text("Tournaments Details"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            }),
+        title: Text(
+          "Tournaments Details",
+          style: TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
       ),
       body: Container(
+        // width: 300,
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
+          borderRadius: BorderRadius.circular(6),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, 15),
+              blurRadius: 22,
+              color: kPrimaryColor.withOpacity(0.22),
+            ),
+            BoxShadow(
+              offset: Offset(-15, -15),
+              blurRadius: 20,
+              color: Colors.white,
+            ),
+          ],
         ),
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
@@ -41,16 +58,160 @@ class _OnTappedTournamentsState extends State<OnTappedTournaments> {
             if (doc.data == null) {
               return Container();
             } else {
-              return Column(
+              return SingleChildScrollView(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    CachedNetworkImage(
-                      imageUrl: doc.data.docs['image2'],
-                      height: 150,
-                      fit: BoxFit.cover,
+                    Container(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                      child: CachedNetworkImage(
+                        imageUrl: doc.data['image2'],
+                        height: 150,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ]);
+                    SizedBox(height: 10),
+                    Divider(),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          "Torunaments Name: ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 20),
+                        Text(
+                          "${doc.data['game']}".toUpperCase(),
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          "Organization Name: ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 20),
+                        Text(
+                          "${doc.data['organization-name']}".toUpperCase(),
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          "Start Date: ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 20),
+                        Text(
+                          "${doc.data['start-date']}".toUpperCase(),
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          "End Date: ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 20),
+                        Text(
+                          "${doc.data['end-date']}".toUpperCase(),
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    ExpansionTile(
+                      title: Text(
+                        "Organization Info: ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                      children: [
+                        Text(
+                          "${doc.data['organization-info']}",
+                          textAlign: TextAlign.justify,
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    ExpansionTile(
+                      title: Text(
+                        "Tournaments Details: ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                      children: [
+                        Text(
+                          "${doc.data['tournament-details']}",
+                          textAlign: TextAlign.justify,
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    ExpansionTile(
+                      title: Text(
+                        "Tournaments Rules: ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                      children: [
+                        Text(
+                          "${doc.data['rules']}",
+                          textAlign: TextAlign.justify,
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    ExpansionTile(
+                      title: Text(
+                        "Tournaments Prize: ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                      children: [
+                        Text(
+                          "${doc.data['prize-pool']}",
+                          textAlign: TextAlign.justify,
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    ExpansionTile(
+                      title: Text(
+                        "Contact Venue: ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                      children: [
+                        Text(
+                          "${doc.data['contact-venue']}",
+                          textAlign: TextAlign.justify,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
             }
           },
         ),

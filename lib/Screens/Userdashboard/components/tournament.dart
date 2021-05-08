@@ -48,7 +48,7 @@ class _TournamentState extends State<Tournament> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => OnTappedTournaments(
-                                  docId: snapshots.data.docs[index].docId,
+                                  docId: snapshots.data.docs[index].id,
                                 )));
                       },
                       child: Container(
