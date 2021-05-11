@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:user/Screens/Userdashboard/components/on_tapped_tournaments.dart';
+import 'package:user/Screens/Sub_screen/on_tapped_tournaments.dart';
 
 class Tournament extends StatefulWidget {
   @override
@@ -69,41 +69,82 @@ class _TournamentState extends State<Tournament> {
                                 SizedBox(
                                   width: 10,
                                 ),
-                                Container(
-                                    child: Text(
+                                Text(
+                                  "Organization Name: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
                                   snapshots
                                       .data.docs[index]['organization-name']
                                       .toUpperCase(),
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.bold),
-                                )),
+                                )
                               ],
                             ),
                             SizedBox(height: 5),
                             Row(
                               children: <Widget>[
                                 SizedBox(width: 10),
-                                Container(
-                                    child: Text(
+                                Text(
+                                  "Torunaments Name: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
                                   snapshots.data.docs[index]['tournament-name'],
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.bold),
-                                )),
+                                ),
                               ],
                             ),
                             SizedBox(height: 5),
                             Row(
                               children: <Widget>[
                                 SizedBox(width: 10),
-                                Container(
-                                    child: Text(
+                                Text(
+                                  "Start Date: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  snapshots.data.docs[index]['start-date'],
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(width: 20),
+                                Text(
+                                  "End Date: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  snapshots.data.docs[index]['end-date'],
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              children: <Widget>[
+                                SizedBox(width: 10),
+                                Text(
+                                  "Issued Date: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
                                   snapshots.data.docs[index]['date'],
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.bold),
-                                )),
+                                ),
                               ],
                             ),
                           ],

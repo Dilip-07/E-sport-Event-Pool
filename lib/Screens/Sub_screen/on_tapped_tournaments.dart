@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class OnTappedTournaments extends StatefulWidget {
   final String docId;
@@ -19,7 +20,7 @@ class _OnTappedTournamentsState extends State<OnTappedTournaments> {
         backgroundColor: Colors.white,
         leading: IconButton(
             icon: Icon(
-              Icons.arrow_back,
+              Feather.chevron_left,
               color: Colors.black,
             ),
             onPressed: () {
@@ -97,6 +98,20 @@ class _OnTappedTournamentsState extends State<OnTappedTournaments> {
                         SizedBox(width: 20),
                         Text(
                           "${doc.data['organization-name']}".toUpperCase(),
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          "Game Name: ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 20),
+                        Text(
+                          "${doc.data['game']}".toUpperCase(),
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
