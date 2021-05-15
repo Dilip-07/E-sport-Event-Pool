@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:user/Screens/Loginpage/Login_page.dart';
 import 'package:user/Screens/Sub_screen/Edit_profile.dart';
+import 'package:user/Screens/Sub_screen/contact_us.dart';
 
 class Userprofile extends StatefulWidget {
   @override
@@ -95,7 +96,10 @@ class _UserprofileState extends State<Userprofile> {
                 Feather.chevron_right,
                 size: 20,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => ContactUs()));
+              },
             ),
             Divider(
               height: 5,
